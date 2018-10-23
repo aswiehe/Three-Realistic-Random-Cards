@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -11,10 +12,15 @@ import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 public class Assignment6 extends Application {
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
+	  
+	// Declare final variable that represents the number of cards to display at any given time during program
+	final int NUMBER_OF_CARDS = 3;
+	  
     // Create a pane to hold the image views and set padding
     Pane pane = new HBox(10);
     pane.setPadding(new Insets(5, 5, 5, 5));
@@ -85,6 +91,19 @@ public class Assignment6 extends Application {
     // will be incremented.
 //    int insertPositionForNextUsedCard = 0;
     
+    // Create ArrayList to hold the cards to be displayed in the panes
+    ArrayList<ImageView> cardsToDisplay = new ArrayList<>();
+    
+    // Call method to get cards as Image Objects???
+    for(int i = 0; i < NUMBER_OF_CARDS; i++) {
+    	String randomCardURL = addCardToPane(unusedCardURLs);
+    	unusedCardURLs.remove(randomCardURL);
+    	Image randomCardImage = new Image(randomCardURL);
+    	ImageView randomCardImgView = new ImageView(randomCardImage);
+    	pane.getChildren().add(randomCardImgView);
+    }
+    
+    /* CODE FOR DOING STUFF THREE TIMES ONE FOR EACH CARD. REPLACED WITH FOR LOOP ABOVE.
     // Randomly pick an index of cardURLs in the unused card ArrayList
     int firstRandCardNum = (int) (Math.random() * 52) + 1;
     int secondRandCardNum = (int) (Math.random() * 52) + 1;
@@ -100,14 +119,42 @@ public class Assignment6 extends Application {
     unusedCardURLs.remove(secondRandImgURL);
     unusedCardURLs.remove(thirdRandImgURL);
     
+    // Add each of those string URLs to the used card ArrayList
+    //// NOT INCLUDED IN FOR LOOP, SEE DOUBLE COMMENT BELOW
+    usedCardURLs.add(firstRandImgURL);
+    usedCardURLs.add(secondRandImgURL);
+    usedCardURLs.add(thirdRandImgURL);
+    //// WHY ARE WE CREATING A LIST OF UNUSED CARDS? NO IDEA, BUT NOT REMOVING CODE UNTIL I KNOW IT'S UNNECESSARY, SINCE I ALREADY TYPED IT UP
+    
     // Create three new Image objects, one for each card to be displayed
     Image firstCardImage = new Image(firstRandImgURL);
     Image secondCardImage = new Image(secondRandImgURL);
     Image thirdCardImage = new Image(thirdRandImgURL);
     
-    pane.getChildren().add(new ImageView(firstCardImage));
-    pane.getChildren().add(new ImageView(secondCardImage));
-    pane.getChildren().add(new ImageView(thirdCardImage));
+    // Use card Image object to create new ImageViews so they can be added to pane
+    ImageView firstCardImgView = new ImageView(firstCardImage);
+	ImageView secondCardImgView = new ImageView(secondCardImage);
+	ImageView thirdCardImgView = new ImageView(secondCardImage);
+	
+	// Add ImageView objects to pane
+    pane.getChildren().add(firstCardImgView);
+    pane.getChildren().add(secondCardImgView);
+    pane.getChildren().add(thirdCardImgView);
+    
+    */
+    
+//    firstCardImgView.setOnMousePressed(e -> {
+//    	
+//    });
+    
+    // Make images clickable
+    
+//    firstCardImage.setOnMousePressed(e -> {       
+//        text.setX(e.getX());
+//        text.setY(e.getY());
+//      });
+    
+    
     
     
     // *** Alternatively you could pass the URL of the .png file directly into the ImageView constructor as
@@ -132,6 +179,12 @@ public class Assignment6 extends Application {
     primaryStage.show();
   }
 
+  public String addCardToPane(ArrayList<String> unusedCardURLs) {
+	  int randomCardNum = (int) (Math.random() * 52) + 1;
+	  String randomCardURL = unusedCardURLs.get(randomCardNum);
+	  return randomCardURL;
+  }
+  
   public static void main(String[] args) {
     launch(args);
   }

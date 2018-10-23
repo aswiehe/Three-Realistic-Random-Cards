@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;Assignment6.getCard()&apos; to &apos;addCardToPane&apos;&#x0D;&#x0A;- Original project: &apos;AdvancedCards&apos;&#x0D;&#x0A;- Original element: &apos;Assignment6.getCard()&apos;&#x0D;&#x0A;- Renamed element: &apos;Assignment6.addCardToPane()&apos;&#x0D;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getCard&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;{Assignment6.java[Assignment6~getCard" name="addCardToPane" references="true" stamp="1540255542694" version="1.0"/>
+</session>
