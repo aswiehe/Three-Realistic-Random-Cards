@@ -1,5 +1,8 @@
 // Avery Wiehe
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -16,40 +19,86 @@ public class Assignment6 extends Application {
     Pane pane = new HBox(10);
     pane.setPadding(new Insets(5, 5, 5, 5));
     
-    // Create an array to hold the String url's for each .png file that contains an image of a card.
-    // Files are stored in the src folder of this project being created. If they are not stored in the 
-    // same place on the users local machine, no cards will show because the URL's must match.
-    String[] cardURLs = {"1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png", "15.png", "16.png", "17.png", "18.png", "19.png", "20.png", "21.png", "22.png", "23.png", "24.png", "25.png", "26.png", "27.png", "28.png", "29.png", "30.png", "31.png", "32.png", "33.png", "34.png", "35.png", "36.png", "37.png", "38.png", "39.png", "40.png", "41.png", "42.png", "43.png", "44.png", "45.png", "46.png", "47.png", "48.png", "49.png", "50.png", "51.png", "52.png"};
+    // Create an ArrayList to hold the String url's for each .png file that contains an image of a card.
+    // File URLs are hard-coded in, and therefore must be copy/pasted to match the file locations on the users machine
+    ArrayList <String> unusedCardURLs = new ArrayList<>(
+    		Arrays.asList(
+    				"1.png", 
+    				"2.png", 
+    				"3.png", 
+    				"4.png", 
+    				"5.png", 
+    				"6.png", 
+    				"7.png", 
+    				"8.png", 
+    				"9.png", 
+    				"10.png", 
+    				"11.png", 
+    				"12.png", 
+    				"13.png", 
+    				"14.png", 
+    				"15.png", 
+    				"16.png", 
+    				"17.png", 
+    				"18.png", 
+    				"19.png", 
+    				"20.png", 
+    				"21.png", 
+    				"22.png", 
+    				"23.png", 
+    				"24.png", 
+    				"25.png", 
+    				"26.png", 
+    				"27.png", 
+    				"28.png", 
+    				"29.png", 
+    				"30.png", 
+    				"31.png", 
+    				"32.png", 
+    				"33.png", 
+    				"34.png",
+    				"35.png", 
+    				"36.png", 
+    				"37.png", 
+    				"38.png", 
+    				"39.png", 
+    				"40.png", 
+    				"41.png", 
+    				"42.png", 
+    				"43.png", 
+    				"44.png", 
+    				"45.png", 
+    				"46.png", 
+    				"47.png", 
+    				"48.png", 
+    				"49.png", 
+    				"50.png", 
+    				"51.png", 
+    				"52.png"));
     
-    // Create an array that will hold card URLs after they are used. This array will be checked each time new cards are drawn.
-    // The length of the new string array is set to cardURLs.length instead of 52 as a matter of keeping code maintainable (for
-    // example, in the case that new cards are added to the array, such as jokers).
-    String[] usedCardURLs = new String[cardURLs.length];
-    
+    // Create an ArrayList that will hold card URLs after they are used. This array will be checked each time new cards are drawn.
+    // The size of the ArrayList is initialized to zero, because zero cards have been drawn at the beginning of the program
+    ArrayList<String> usedCardURLs = new ArrayList<>();
+        
     // A kind of "counter" that will serve as parameter for add(), when used to place card in array of used cards. Will also be
     // used to indicate how far through the used card array the loop that checks if the card is used needs to check. This value
     // will be incremented.
-    int insertPositionForNextUsedCard = 0;
+//    int insertPositionForNextUsedCard = 0;
     
-    // Randomly pick an index of cardURLs array
+    // Randomly pick an index of cardURLs in the unused card ArrayList
     int firstRandCardNum = (int) (Math.random() * 52) + 1;
     int secondRandCardNum = (int) (Math.random() * 52) + 1;
     int thirdRandCardNum = (int) (Math.random() * 52) + 1;
     
-    // Create a for loop to check in the usedCardURLs if that cards URL has been used before
-    for(int i = 0; i <= insertPositionForNextUsedCard; i++) {
-    	if(!usedCardURLs[i].equals(firstRandCardNum)) {
-    		// WARNING: WHEN THERE ARE ONLY A COUPLE CARDS LEFT, THIS FOR LOOP WILL BE EXTREMELY INEFFICIENT. CONSIDER USING ARRAYLISTS
-    		// SO THAT YOU ONLY NEED TO POP AND ADD STRING OBJECTS AND DON'T HAVE TO WORRY ABOUT PICKING A RANDOM POSITION IN THE ARRAY
-    		// AND THEN CHECKING WHETHER OR NOT IT WAS A VALID POSITION TO PICK IN THE FIRST PLACE. PUSHING TO GIT REPO AND IMPLEMENTING
-    		// CHANGES NOW. CONSIDER THIS CODE DEPRECATED.
-    		firstRandCardNum = (int) (Math.random() * 52) + 1;
-    	}
-    }
+    // Set each string at that random index to a String variable
+    String firstRandImgURL = unusedCardURLs.get(firstRandCardNum);
+    String secondRandImgURL = unusedCardURLs.get(secondRandCardNum);
+    String thirdRandImgURL = unusedCardURLs.get(thirdRandCardNum);
     
-    String firstRandImgURL = cardURLs[firstRandCardNum];
-    String secondRandImgURL = cardURLs[secondRandCardNum];
-    String thirdRandImgURL = cardURLs[thirdRandCardNum];
+    // Pull each of those string URLs out of the unused card ArrayList
+    unusedCardURLs.remove(firstRandImgURL);
+    unusedCardURLs.remove(secondRandImgURL);
+    unusedCardURLs.remove(thirdRandImgURL);
     
     // Create three new Image objects, one for each card to be displayed
     Image firstCardImage = new Image(firstRandImgURL);
